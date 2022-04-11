@@ -12,16 +12,16 @@ import (
 
 	"github.com/spf13/viper"
 
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/crypto/bls"
+	"github.com/ckm8token/ckm8/blockchain"
+	"github.com/ckm8token/ckm8/crypto/bls"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/crypto"
-	"github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/mempool"
-	"github.com/thetatoken/theta/version"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/core"
+	"github.com/ckm8token/ckm8/crypto"
+	"github.com/ckm8token/ckm8/ledger/state"
+	"github.com/ckm8token/ckm8/ledger/types"
+	"github.com/ckm8token/ckm8/mempool"
+	"github.com/ckm8token/ckm8/version"
 )
 
 // ------------------------------- GetVersion -----------------------------------
@@ -35,7 +35,7 @@ type GetVersionResult struct {
 	Timestamp string `json:"timestamp"`
 }
 
-func (t *ThetaRPCService) GetVersion(args *GetVersionArgs, result *GetVersionResult) (err error) {
+func (t *ckm8RPCService) GetVersion(args *GetVersionArgs, result *GetVersionResult) (err error) {
 	result.Version = version.Version
 	result.GitHash = version.GitHash
 	result.Timestamp = version.Timestamp
@@ -56,7 +56,7 @@ type GetAccountResult struct {
 	Address string `json:"address"`
 }
 
-func (t *ThetaRPCService) GetAccount(args *GetAccountArgs, result *GetAccountResult) (err error) {
+func (t *ckm8RPCService) GetAccount(args *GetAccountArgs, result *GetAccountResult) (err error) {
 	if args.Address == "" {
 		return errors.New("Address must be specified")
 	}
@@ -126,7 +126,7 @@ type GetSplitRuleResult struct {
 	*types.SplitRule
 }
 
-func (t *ThetaRPCService) GetSplitRule(args *GetSplitRuleArgs, result *GetSplitRuleResult) (err error) {
+func (t *ckm8RPCService) GetSplitRule(args *GetSplitRuleArgs, result *GetSplitRuleResult) (err error) {
 	if args.ResourceID == "" {
 		return errors.New("ResourceID must be specified")
 	}
@@ -164,7 +164,7 @@ const (
 	TxStatusAbandoned = "abandoned"
 )
 
-func (t *ThetaRPCService) GetTransaction(args *GetTransactionArgs, result *GetTransactionResult) (err error) {
+func (t *ckm8RPCService) GetTransaction(args *GetTransactionArgs, result *GetTransactionResult) (err error) {
 	if args.Hash == "" {
 		return errors.New("Transanction hash must be specified")
 	}
@@ -225,7 +225,7 @@ type GetPendingTransactionsResult struct {
 	TxHashes []string `json:"tx_hashes"`
 }
 
-func (t *ThetaRPCService) GetPendingTransactions(args *GetPendingTransactionsArgs, result *GetPendingTransactionsResult) (err error) {
+func (t *ckm8RPCService) GetPendingTransactions(args *GetPendingTransactionsArgs, result *GetPendingTransactionsResult) (err error) {
 	pendingTxHashes := t.mempool.GetCandidateTransactionHashes()
 	result.TxHashes = pendingTxHashes
 	return nil
@@ -276,7 +276,7 @@ type GetBlockResultInner struct {
 	Status   core.BlockStatus `json:"status"`
 
 	Hash common.Hash   `json:"hash"`
-	Txs  []interface{} `json:"transactions"` // for backward conpatibility, see function ThetaRPCService.gatherTxs()
+	Txs  []interface{} `json:"transactions"` // for backward conpatibility, see function ckm8RPCService.gatherTxs()
 }
 
 type TxType byte
@@ -296,7 +296,7 @@ const (
 	TxTypeStakeRewardDistributionTx
 )
 
-func (t *ThetaRPCService) GetBlock(args *GetBlockArgs, result *GetBlockResult) (err error) {
+func (t *ckm8RPCService) GetBlock(args *GetBlockArgs, result *GetBlockResult) (err error) {
 	if args.Hash.IsEmpty() {
 		return errors.New("Block hash must be specified")
 	}
@@ -334,7 +334,7 @@ type GetBlockByHeightArgs struct {
 	IncludeEthTxHashes bool              `json:"include_eth_tx_hashes"`
 }
 
-func (t *ThetaRPCService) GetBlockByHeight(args *GetBlockByHeightArgs, result *GetBlockResult) (err error) {
+func (t *ckm8RPCService) GetBlockByHeight(args *GetBlockByHeightArgs, result *GetBlockResult) (err error) {
 	// if args.Height == 0 {
 	// 	return errors.New("Block height must be specified")
 	// }
@@ -401,7 +401,7 @@ type GetBlocksByRangeArgs struct {
 	IncludeEthTxHashes bool              `json:"include_eth_tx_hashes"`
 }
 
-func (t *ThetaRPCService) GetBlocksByRange(args *GetBlocksByRangeArgs, result *GetBlocksResult) (err error) {
+func (t *ckm8RPCService) GetBlocksByRange(args *GetBlocksByRangeArgs, result *GetBlocksResult) (err error) {
 	// if args.Start == 0 && args.End == 0 {
 	// 	return errors.New("Starting block and ending block must be specified")
 	// }
@@ -503,7 +503,7 @@ type GetStatusResult struct {
 	GenesisBlockHash           common.Hash       `json:"genesis_block_hash"`
 }
 
-func (t *ThetaRPCService) GetStatus(args *GetStatusArgs, result *GetStatusResult) (err error) {
+func (t *ckm8RPCService) GetStatus(args *GetStatusArgs, result *GetStatusResult) (err error) {
 	s := t.consensus.GetSummary()
 	result.Address = t.consensus.ID()
 	//result.PeerID = t.dispatcher.ID()
@@ -561,7 +561,7 @@ type GetPeerURLsResult struct {
 	PeerURLs []string `json:"peer_urls"`
 }
 
-func (t *ThetaRPCService) GetPeerURLs(args *GetPeersArgs, result *GetPeerURLsResult) (err error) {
+func (t *ckm8RPCService) GetPeerURLs(args *GetPeersArgs, result *GetPeerURLsResult) (err error) {
 	peerURLs := t.dispatcher.PeerURLs(args.SkipEdgeNode)
 
 	numPeers := len(peerURLs)
@@ -587,7 +587,7 @@ type GetPeersResult struct {
 	Peers []string `json:"peers"`
 }
 
-func (t *ThetaRPCService) GetPeers(args *GetPeersArgs, result *GetPeersResult) (err error) {
+func (t *ckm8RPCService) GetPeers(args *GetPeersArgs, result *GetPeersResult) (err error) {
 	peers := t.dispatcher.Peers(args.SkipEdgeNode)
 	result.Peers = peers
 
@@ -610,7 +610,7 @@ type BlockHashVcpPair struct {
 	HeightList *types.HeightList
 }
 
-func (t *ThetaRPCService) GetVcpByHeight(args *GetVcpByHeightArgs, result *GetVcpResult) (err error) {
+func (t *ckm8RPCService) GetVcpByHeight(args *GetVcpByHeightArgs, result *GetVcpResult) (err error) {
 	deliveredView, err := t.ledger.GetDeliveredSnapshot()
 	if err != nil {
 		return err
@@ -657,7 +657,7 @@ type BlockHashGcpPair struct {
 	Gcp       *core.GuardianCandidatePool
 }
 
-func (t *ThetaRPCService) GetGcpByHeight(args *GetGcpByHeightArgs, result *GetGcpResult) (err error) {
+func (t *ckm8RPCService) GetGcpByHeight(args *GetGcpByHeightArgs, result *GetGcpResult) (err error) {
 	deliveredView, err := t.ledger.GetDeliveredSnapshot()
 	if err != nil {
 		return err
@@ -698,7 +698,7 @@ type GetGuardianInfoResult struct {
 	Signature string
 }
 
-func (t *ThetaRPCService) GetGuardianInfo(args *GetGuardianInfoArgs, result *GetGuardianInfoResult) (err error) {
+func (t *ckm8RPCService) GetGuardianInfo(args *GetGuardianInfoArgs, result *GetGuardianInfoResult) (err error) {
 	privKey := t.consensus.PrivateKey()
 	blsKey, err := bls.GenKey(strings.NewReader(common.Bytes2Hex(privKey.PublicKey().ToBytes())))
 	if err != nil {
@@ -734,7 +734,7 @@ type BlockHashEenpPair struct {
 	EENs      []*core.EliteEdgeNode
 }
 
-func (t *ThetaRPCService) GetEenpByHeight(args *GetEenpByHeightArgs, result *GetEenpResult) (err error) {
+func (t *ckm8RPCService) GetEenpByHeight(args *GetEenpByHeightArgs, result *GetEenpResult) (err error) {
 	deliveredView, err := t.ledger.GetDeliveredSnapshot()
 	if err != nil {
 		return err
@@ -781,7 +781,7 @@ type BlockHashStakeRewardDistributionRuleSetPair struct {
 	StakeRewardDistributionRuleSet []*core.RewardDistribution
 }
 
-func (t *ThetaRPCService) GetStakeRewardDistributionByHeight(
+func (t *ckm8RPCService) GetStakeRewardDistributionByHeight(
 	args *GetStakeRewardDistributionRuleSetByHeightArgs, result *GetStakeRewardDistributionRuleSetResult) (err error) {
 	deliveredView, err := t.ledger.GetDeliveredSnapshot()
 	if err != nil {
@@ -833,7 +833,7 @@ type GetEliteEdgeNodeStakeReturnsByHeightResult struct {
 	EENStakeReturns []state.StakeWithHolder
 }
 
-func (t *ThetaRPCService) GetEliteEdgeNodeStakeReturnsByHeight(
+func (t *ckm8RPCService) GetEliteEdgeNodeStakeReturnsByHeight(
 	args *GetEliteEdgeNodeStakeReturnsByHeightArgs, result *GetEliteEdgeNodeStakeReturnsByHeightResult) (err error) {
 	deliveredView, err := t.ledger.GetDeliveredSnapshot()
 	if err != nil {
@@ -860,7 +860,7 @@ type GetAllPendingEliteEdgeNodeStakeReturnsResult struct {
 	EENHeightStakeReturnsPairs []HeightStakeReturnsPair
 }
 
-func (t *ThetaRPCService) GetAllPendingEliteEdgeNodeStakeReturns(
+func (t *ckm8RPCService) GetAllPendingEliteEdgeNodeStakeReturns(
 	args *GetAllPendingEliteEdgeNodeStakeReturnsArgs, result *GetAllPendingEliteEdgeNodeStakeReturnsResult) (err error) {
 	deliveredView, err := t.ledger.GetDeliveredSnapshot()
 	if err != nil {
@@ -903,7 +903,7 @@ type GetCodeResult struct {
 	Code    string `json:"code"`
 }
 
-func (t *ThetaRPCService) GetCode(args *GetCodeArgs, result *GetCodeResult) (err error) {
+func (t *ckm8RPCService) GetCode(args *GetCodeArgs, result *GetCodeResult) (err error) {
 	if args.Address == "" {
 		return errors.New("address must be specified")
 	}
@@ -962,7 +962,7 @@ type GetStorageAtResult struct {
 	Value string `json:"value"`
 }
 
-func (t *ThetaRPCService) GetStorageAt(args *GetStorageAtArgs, result *GetStorageAtResult) (err error) {
+func (t *ckm8RPCService) GetStorageAt(args *GetStorageAtArgs, result *GetStorageAtResult) (err error) {
 	if args.Address == "" || args.StoragePosition == "" {
 		return fmt.Errorf("address and storage_position must be specified, address: %v, storage_position: %v", args.Address, args.StoragePosition)
 	}
@@ -1010,7 +1010,7 @@ func (t *ThetaRPCService) GetStorageAt(args *GetStorageAtArgs, result *GetStorag
 
 // ------------------------------ Utils ------------------------------
 
-func (t *ThetaRPCService) gatherTxs(block *core.ExtendedBlock, txs *[]interface{}, includeEthTxHashes bool) error {
+func (t *ckm8RPCService) gatherTxs(block *core.ExtendedBlock, txs *[]interface{}, includeEthTxHashes bool) error {
 	// Parse and fulfill Txs.
 	//var tx types.Tx
 	for _, txBytes := range block.Txs {

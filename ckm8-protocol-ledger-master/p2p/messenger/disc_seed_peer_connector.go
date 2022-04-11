@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/thetatoken/theta/p2p/netutil"
+	"github.com/ckm8token/ckm8/p2p/netutil"
 )
 
 const (

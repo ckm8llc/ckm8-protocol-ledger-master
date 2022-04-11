@@ -19,8 +19,8 @@ docker:
 install: gen_version release
 
 exe:
-	CGO_ENABLED=1 GOOS=windows GOARCH=amd64 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go build -o theta.exe ./cmd/theta/
-	CGO_ENABLED=1 GOOS=windows GOARCH=amd64 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go build -o thetacli.exe ./cmd/thetacli/
+	CGO_ENABLED=1 GOOS=windows GOARCH=amd64 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go build -o ckm8.exe ./cmd/ckm8/
+	CGO_ENABLED=1 GOOS=windows GOARCH=amd64 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go build -o ckm8cli.exe ./cmd/ckm8cli/
 
 release:
 	go install ./cmd/...

@@ -9,10 +9,10 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/ledger/vm"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/ledger/types"
+	"https://github.com/fsmile2/ckm8/ledger/vm"
 )
 
 func TestSimpleSmartContractDeploymentAndExecution(t *testing.T) {

@@ -15,20 +15,20 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/spf13/viper"
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/util"
-	"github.com/thetatoken/theta/consensus"
-	"github.com/thetatoken/theta/core"
-	dp "github.com/thetatoken/theta/dispatcher"
-	"github.com/thetatoken/theta/version"
+	"github.com/ckm8token/ckm8/blockchain"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/common/util"
+	"github.com/ckm8token/ckm8/consensus"
+	"github.com/ckm8token/ckm8/core"
+	dp "github.com/ckm8token/ckm8/dispatcher"
+	"github.com/ckm8token/ckm8/version"
 )
 
 var logger *log.Entry = log.WithFields(log.Fields{"prefix": "reporter"})
 var reportPeersPort string = ":9000"
 var setPeersSuffix string = "/peers/set"
 var peerUrl string
-var rpcJSON = []byte(`{"jsonrpc": "2.0", "method": "theta.GetStatus", "params": [{}], "id": 0}`)
+var rpcJSON = []byte(`{"jsonrpc": "2.0", "method": "ckm8.GetStatus", "params": [{}], "id": 0}`)
 
 const sleepTime time.Duration = time.Second * 60 * 10
 

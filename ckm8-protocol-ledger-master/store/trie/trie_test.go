@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2014 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -31,11 +31,11 @@ import (
 	"testing/quick"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/crypto"
-	"github.com/thetatoken/theta/rlp"
-	"github.com/thetatoken/theta/store/database"
-	dbbackend "github.com/thetatoken/theta/store/database/backend"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/crypto"
+	"github.com/ckm8token/ckm8/rlp"
+	"github.com/ckm8token/ckm8/store/database"
+	dbbackend "github.com/ckm8token/ckm8/store/database/backend"
 )
 
 func init() {

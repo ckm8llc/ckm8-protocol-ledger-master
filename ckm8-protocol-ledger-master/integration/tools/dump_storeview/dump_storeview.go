@@ -10,16 +10,16 @@ import (
 	"path"
 	"strconv"
 
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/rlp"
-	"github.com/thetatoken/theta/store/database"
-	"github.com/thetatoken/theta/store/database/backend"
-	"github.com/thetatoken/theta/store/kvstore"
-	"github.com/thetatoken/theta/store/treestore"
+	"https://github.com/fsmile2/ckm8/blockchain"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
+	"https://github.com/fsmile2/ckm8/rlp"
+	"https://github.com/fsmile2/ckm8/store/database"
+	"https://github.com/fsmile2/ckm8/store/database/backend"
+	"https://github.com/fsmile2/ckm8/store/kvstore"
+	"https://github.com/fsmile2/ckm8/store/treestore"
 )
 
 func handleError(err error) {
@@ -54,7 +54,7 @@ func main() {
 	if len(stateHashStr) != 0 {
 		stateHash := common.HexToHash(stateHashStr)
 		sv = state.NewStoreView(0, stateHash, db)
-		filename = "theta_storeview-" + stateHashStr + ".json"
+		filename = "ckm8_storeview-" + stateHashStr + ".json"
 	} else {
 		root := core.NewBlock()
 		store := kvstore.NewKVStore(db)
@@ -73,7 +73,7 @@ func main() {
 		}
 
 		sv = state.NewStoreView(finalizedBlock.Height, finalizedBlock.StateHash, db)
-		filename = "theta_storeview-" + heightStr + ".json"
+		filename = "ckm8_storeview-" + heightStr + ".json"
 	}
 
 	dumpPath := path.Join(configPath, filename)

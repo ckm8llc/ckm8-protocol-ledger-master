@@ -3,13 +3,13 @@ package execution
 import (
 	log "github.com/sirupsen/logrus"
 
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/result"
-	"github.com/thetatoken/theta/core"
-	st "github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/store/database"
+	"https://github.com/fsmile2/ckm8/blockchain"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/common/result"
+	"https://github.com/fsmile2/ckm8/core"
+	st "https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
+	"https://github.com/fsmile2/ckm8/store/database"
 )
 
 var logger *log.Entry = log.WithFields(log.Fields{"prefix": "ledger"})
@@ -177,7 +177,7 @@ func (exec *Executor) isTxTypeSupported(view *st.StoreView, tx types.Tx) bool {
 			return false
 		}
 	case *types.StakeRewardDistributionTx:
-		if blockHeight < common.HeightEnableTheta3 {
+		if blockHeight < common.HeightEnableckm83 {
 			return false
 		}
 	default:

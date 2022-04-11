@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/thetatoken/theta/store/database"
+	"github.com/ckm8token/ckm8/store/database"
 )
 
 func newTestBDB() (*BadgerDatabase, database.Batch, func()) {

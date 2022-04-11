@@ -17,21 +17,21 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/util"
-	"github.com/thetatoken/theta/consensus"
-	"github.com/thetatoken/theta/dispatcher"
-	"github.com/thetatoken/theta/ledger"
-	"github.com/thetatoken/theta/mempool"
-	"github.com/thetatoken/theta/rpc/lib/rpc-codec/jsonrpc2"
+	"github.com/ckm8token/ckm8/blockchain"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/common/util"
+	"github.com/ckm8token/ckm8/consensus"
+	"github.com/ckm8token/ckm8/dispatcher"
+	"github.com/ckm8token/ckm8/ledger"
+	"github.com/ckm8token/ckm8/mempool"
+	"github.com/ckm8token/ckm8/rpc/lib/rpc-codec/jsonrpc2"
 	"golang.org/x/net/netutil"
 	"golang.org/x/net/websocket"
 )
 
 var logger *log.Entry
 
-type ThetaRPCService struct {
+type ckm8RPCService struct {
 	mempool    *mempool.Mempool
 	ledger     *ledger.Ledger
 	dispatcher *dispatcher.Dispatcher
@@ -45,9 +45,9 @@ type ThetaRPCService struct {
 	stopped bool
 }
 
-// ThetaRPCServer is an instance of RPC service.
-type ThetaRPCServer struct {
-	*ThetaRPCService
+// ckm8RPCServer is an instance of RPC service.
+type ckm8RPCServer struct {
+	*ckm8RPCService
 
 	server   *http.Server
 	handler  *rpc.Server
@@ -55,11 +55,11 @@ type ThetaRPCServer struct {
 	listener net.Listener
 }
 
-// NewThetaRPCServer creates a new instance of ThetaRPCServer.
-func NewThetaRPCServer(mempool *mempool.Mempool, ledger *ledger.Ledger, dispatcher *dispatcher.Dispatcher,
-	chain *blockchain.Chain, consensus *consensus.ConsensusEngine) *ThetaRPCServer {
-	t := &ThetaRPCServer{
-		ThetaRPCService: &ThetaRPCService{
+// Newckm8RPCServer creates a new instance of ckm8RPCServer.
+func Newckm8RPCServer(mempool *mempool.Mempool, ledger *ledger.Ledger, dispatcher *dispatcher.Dispatcher,
+	chain *blockchain.Chain, consensus *consensus.ConsensusEngine) *ckm8RPCServer {
+	t := &ckm8RPCServer{
+		ckm8RPCService: &ckm8RPCService{
 			wg: &sync.WaitGroup{},
 		},
 	}
@@ -71,7 +71,7 @@ func NewThetaRPCServer(mempool *mempool.Mempool, ledger *ledger.Ledger, dispatch
 	t.consensus = consensus
 
 	s := rpc.NewServer()
-	s.RegisterName("theta", t.ThetaRPCService)
+	s.RegisterName("ckm8", t.ckm8RPCService)
 
 	t.handler = s
 
@@ -92,7 +92,7 @@ func NewThetaRPCServer(mempool *mempool.Mempool, ledger *ledger.Ledger, dispatch
 }
 
 // Start creates the main goroutine.
-func (t *ThetaRPCServer) Start(ctx context.Context) {
+func (t *ckm8RPCServer) Start(ctx context.Context) {
 	c, cancel := context.WithCancel(ctx)
 	t.ctx = c
 	t.cancel = cancel
@@ -104,7 +104,7 @@ func (t *ThetaRPCServer) Start(ctx context.Context) {
 	go t.txCallback()
 }
 
-func (t *ThetaRPCServer) mainLoop() {
+func (t *ckm8RPCServer) mainLoop() {
 	defer t.wg.Done()
 
 	go t.serve()
@@ -114,7 +114,7 @@ func (t *ThetaRPCServer) mainLoop() {
 	t.server.Shutdown(t.ctx)
 }
 
-func (t *ThetaRPCServer) serve() {
+func (t *ckm8RPCServer) serve() {
 	address := viper.GetString(common.CfgRPCAddress)
 	port := viper.GetString(common.CfgRPCPort)
 	l, err := net.Listen("tcp", address+":"+port)
@@ -147,12 +147,12 @@ func corsMiddleware(handler http.Handler) http.Handler {
 }
 
 // Stop notifies all goroutines to stop without blocking.
-func (t *ThetaRPCServer) Stop() {
+func (t *ckm8RPCServer) Stop() {
 	t.cancel()
 }
 
 // Wait blocks until all goroutines stop.
-func (t *ThetaRPCServer) Wait() {
+func (t *ckm8RPCServer) Wait() {
 	t.wg.Wait()
 }
 
@@ -160,7 +160,7 @@ type defaultHTTPHandler struct {
 }
 
 func (dh *defaultHTTPHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Theta Node is up and running!")
+	fmt.Fprintf(w, "ckm8 Node is up and running!")
 }
 
 //

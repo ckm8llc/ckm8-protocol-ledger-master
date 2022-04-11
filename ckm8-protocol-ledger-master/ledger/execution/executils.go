@@ -4,11 +4,11 @@ import (
 	"encoding/hex"
 	"math/big"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/result"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/common/result"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
 )
 
 // --------------------------------- Execution Utilities -------------------------------------
@@ -270,7 +270,7 @@ func sanityCheckForGasPrice(gasPrice *big.Int, blockHeight uint64) bool {
 func sanityCheckForFee(fee types.Coins, blockHeight uint64) (minimumFee *big.Int, success bool) {
 	fee = fee.NoNil()
 	minimumFee = types.GetMinimumTransactionFeeTFuelWei(blockHeight)
-	success = (fee.ThetaWei.Cmp(types.Zero) == 0 && fee.TFuelWei.Cmp(minimumFee) >= 0)
+	success = (fee.ckm8Wei.Cmp(types.Zero) == 0 && fee.TFuelWei.Cmp(minimumFee) >= 0)
 
 	return minimumFee, success
 }
@@ -278,7 +278,7 @@ func sanityCheckForFee(fee types.Coins, blockHeight uint64) (minimumFee *big.Int
 func sanityCheckForSendTxFee(fee types.Coins, numAccountsAffected uint64, blockHeight uint64) (minimumFee *big.Int, success bool) {
 	fee = fee.NoNil()
 	minimumFee = types.GetSendTxMinimumTransactionFeeTFuelWei(numAccountsAffected, blockHeight)
-	success = (fee.ThetaWei.Cmp(types.Zero) == 0 && fee.TFuelWei.Cmp(minimumFee) >= 0)
+	success = (fee.ckm8Wei.Cmp(types.Zero) == 0 && fee.TFuelWei.Cmp(minimumFee) >= 0)
 
 	return minimumFee, success
 }

@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2014 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -23,8 +23,8 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/thetatoken/theta/common"
-	dbbackend "github.com/thetatoken/theta/store/database/backend"
+	"github.com/ckm8token/ckm8/common"
+	dbbackend "github.com/ckm8token/ckm8/store/database/backend"
 )
 
 func TestIterator(t *testing.T) {

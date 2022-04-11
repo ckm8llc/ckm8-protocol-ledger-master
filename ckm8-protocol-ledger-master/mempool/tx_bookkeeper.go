@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/crypto"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/crypto"
 )
 
 const defaultMaxNumTxs = uint(200000)

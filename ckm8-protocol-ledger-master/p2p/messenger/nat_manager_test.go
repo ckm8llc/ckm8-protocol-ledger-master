@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/thetatoken/theta/p2p/netutil"
-	pr "github.com/thetatoken/theta/p2p/peer"
-	"github.com/thetatoken/theta/rlp"
+	"github.com/ckm8token/ckm8/p2p/netutil"
+	pr "github.com/ckm8token/ckm8/p2p/peer"
+	"github.com/ckm8token/ckm8/rlp"
 )
 
 func TestPeerEportUpdate(t *testing.T) {

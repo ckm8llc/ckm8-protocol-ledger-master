@@ -10,10 +10,10 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/util"
-	"github.com/thetatoken/theta/store/database"
+	"github.com/ckm8token/ckm8/blockchain"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/common/util"
+	"github.com/ckm8token/ckm8/store/database"
 )
 
 var logger = util.GetLoggerForModule("rollingdb")

@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/result"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/crypto"
-	st "github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/ledger/vm"
+	"https://github.com/fsmile2/ckm8/blockchain"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/common/result"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/crypto"
+	st "https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
+	"https://github.com/fsmile2/ckm8/ledger/vm"
 )
 
 var _ TxExecutor = (*SmartContractTxExecutor)(nil)
@@ -58,8 +58,8 @@ func (exec *SmartContractTxExecutor) sanityCheck(chainID string, view *st.StoreV
 		}
 
 		// interpret the signature as ETH tx signature
-		if tx.From.Coins.ThetaWei.Cmp(big.NewInt(0)) != 0 {
-			return result.Error("Sending Theta with ETH transaction is not allowed") // extra check, since ETH transaction only signs the TFuel part (i.e., value, gasPrice, gasLimit, etc)
+		if tx.From.Coins.ckm8Wei.Cmp(big.NewInt(0)) != 0 {
+			return result.Error("Sending ckm8 with ETH transaction is not allowed") // extra check, since ETH transaction only signs the TFuel part (i.e., value, gasPrice, gasLimit, etc)
 		}
 
 		ethSigningHash := tx.EthSigningHash(chainID, blockHeight)
@@ -73,7 +73,7 @@ func (exec *SmartContractTxExecutor) sanityCheck(chainID string, view *st.StoreV
 	// Get input account
 	fromAccount, success := getInput(view, tx.From)
 	if success.IsError() {
-		return result.Error("Failed to get the account (the address has no Theta nor TFuel)")
+		return result.Error("Failed to get the account (the address has no ckm8 nor TFuel)")
 	}
 
 	// Validate input, advanced
@@ -120,15 +120,15 @@ func (exec *SmartContractTxExecutor) sanityCheck(chainID string, view *st.StoreV
 
 	var minimalBalance types.Coins
 	value := coins.TFuelWei      // NoNil() already guarantees value is NOT nil
-	thetaValue := coins.ThetaWei // NoNil() already guarantees value is NOT nil
-	if !vm.SupportThetaTransferInEVM(blockHeight) {
+	ckm8Value := coins.ckm8Wei // NoNil() already guarantees value is NOT nil
+	if !vm.Supportckm8TransferInEVM(blockHeight) {
 		minimalBalance = types.Coins{
-			ThetaWei: zero,
+			ckm8Wei: zero,
 			TFuelWei: feeLimit.Add(feeLimit, value),
 		}
 	} else {
 		minimalBalance = types.Coins{
-			ThetaWei: thetaValue,
+			ckm8Wei: ckm8Value,
 			TFuelWei: feeLimit.Add(feeLimit, value),
 		}
 	}
@@ -160,7 +160,7 @@ func (exec *SmartContractTxExecutor) process(chainID string, view *st.StoreView,
 
 	feeAmount := new(big.Int).Mul(tx.GasPrice, new(big.Int).SetUint64(gasUsed))
 	fee := types.Coins{
-		ThetaWei: big.NewInt(int64(0)),
+		ckm8Wei: big.NewInt(int64(0)),
 		TFuelWei: feeAmount,
 	}
 	if !chargeFee(fromAccount, fee) {

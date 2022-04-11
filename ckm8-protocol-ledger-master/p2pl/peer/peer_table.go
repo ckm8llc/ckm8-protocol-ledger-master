@@ -8,8 +8,8 @@ import (
 	"sync"
 
 	pr "github.com/libp2p/go-libp2p-core/peer"
-	"github.com/thetatoken/theta/common"
-	mm "github.com/thetatoken/theta/common/math"
+	"github.com/ckm8token/ckm8/common"
+	mm "github.com/ckm8token/ckm8/common/math"
 
 	"github.com/spf13/viper"
 	"github.com/syndtr/goleveldb/leveldb"

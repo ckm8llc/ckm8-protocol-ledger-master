@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2014 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -26,8 +26,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/thetatoken/theta/store"
-	"github.com/thetatoken/theta/store/database"
+	"github.com/ckm8token/ckm8/store"
+	"github.com/ckm8token/ckm8/store/database"
 )
 
 func newTestLDB() (*LDBDatabase, func()) {

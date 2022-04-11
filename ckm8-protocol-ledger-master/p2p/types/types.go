@@ -3,8 +3,8 @@ package types
 import (
 	"fmt"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/crypto"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/crypto"
 )
 
 //

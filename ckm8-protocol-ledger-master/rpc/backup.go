@@ -4,8 +4,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/snapshot"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/snapshot"
 )
 
 // ------------------------------- BackupSnapshot -----------------------------------
@@ -20,7 +20,7 @@ type BackupSnapshotResult struct {
 	SnapshotFile string `json:"snapshot_file"`
 }
 
-func (t *ThetaRPCService) BackupSnapshot(args *BackupSnapshotArgs, result *BackupSnapshotResult) error {
+func (t *ckm8RPCService) BackupSnapshot(args *BackupSnapshotArgs, result *BackupSnapshotResult) error {
 	// Default to older verison
 	if args.Version == 0 {
 		args.Version = 2
@@ -64,7 +64,7 @@ type BackupChainResult struct {
 	ChainFile         string `json:"chain_file"`
 }
 
-func (t *ThetaRPCService) BackupChain(args *BackupChainArgs, result *BackupChainResult) error {
+func (t *ckm8RPCService) BackupChain(args *BackupChainArgs, result *BackupChainResult) error {
 	chain := t.chain
 	startHeight := args.Start
 	endHeight := args.End
@@ -96,7 +96,7 @@ type BackupChainCorrectionResult struct {
 	BlockHashMap map[uint64]string `json:"block_hash_map"`
 }
 
-func (t *ThetaRPCService) BackupChainCorrection(args *BackupChainCorrectionArgs, result *BackupChainCorrectionResult) error {
+func (t *ckm8RPCService) BackupChainCorrection(args *BackupChainCorrectionArgs, result *BackupChainCorrectionResult) error {
 	chain := t.chain
 	ledger := t.consensus.GetLedger()
 	snapshotHeight := args.SnapshotHeight

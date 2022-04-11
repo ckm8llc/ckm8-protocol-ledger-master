@@ -7,24 +7,24 @@ import (
 	"sync"
 
 	"github.com/spf13/viper"
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/consensus"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/crypto"
-	dp "github.com/thetatoken/theta/dispatcher"
-	ld "github.com/thetatoken/theta/ledger"
-	mp "github.com/thetatoken/theta/mempool"
-	"github.com/thetatoken/theta/netsync"
-	"github.com/thetatoken/theta/p2p"
-	"github.com/thetatoken/theta/p2pl"
-	rp "github.com/thetatoken/theta/report"
-	"github.com/thetatoken/theta/rpc"
-	"github.com/thetatoken/theta/snapshot"
-	"github.com/thetatoken/theta/store"
-	"github.com/thetatoken/theta/store/database"
-	"github.com/thetatoken/theta/store/kvstore"
-	"github.com/thetatoken/theta/store/rollingdb"
+	"github.com/ckm8token/ckm8/blockchain"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/consensus"
+	"github.com/ckm8token/ckm8/core"
+	"github.com/ckm8token/ckm8/crypto"
+	dp "github.com/ckm8token/ckm8/dispatcher"
+	ld "github.com/ckm8token/ckm8/ledger"
+	mp "github.com/ckm8token/ckm8/mempool"
+	"github.com/ckm8token/ckm8/netsync"
+	"github.com/ckm8token/ckm8/p2p"
+	"github.com/ckm8token/ckm8/p2pl"
+	rp "github.com/ckm8token/ckm8/report"
+	"github.com/ckm8token/ckm8/rpc"
+	"github.com/ckm8token/ckm8/snapshot"
+	"github.com/ckm8token/ckm8/store"
+	"github.com/ckm8token/ckm8/store/database"
+	"github.com/ckm8token/ckm8/store/kvstore"
+	"github.com/ckm8token/ckm8/store/rollingdb"
 )
 
 type Node struct {
@@ -36,7 +36,7 @@ type Node struct {
 	Dispatcher       *dp.Dispatcher
 	Ledger           core.Ledger
 	Mempool          *mp.Mempool
-	RPC              *rpc.ThetaRPCServer
+	RPC              *rpc.ckm8RPCServer
 	reporter         *rp.Reporter
 
 	// Life cycle
@@ -119,7 +119,7 @@ func NewNode(params *Params) *Node {
 	}
 
 	if viper.GetBool(common.CfgRPCEnabled) {
-		node.RPC = rpc.NewThetaRPCServer(mempool, ledger, dispatcher, chain, consensus)
+		node.RPC = rpc.Newckm8RPCServer(mempool, ledger, dispatcher, chain, consensus)
 	}
 	return node
 }

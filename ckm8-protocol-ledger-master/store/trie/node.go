@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2014 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -22,8 +22,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/rlp"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/rlp"
 )
 
 var indices = []string{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "[17]"}

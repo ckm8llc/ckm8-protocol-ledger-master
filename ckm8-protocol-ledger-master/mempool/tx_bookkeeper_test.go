@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	log "github.com/sirupsen/logrus"
-	"github.com/thetatoken/theta/common"
+	"https://github.com/fsmile2/ckm8/common"
 
 	"github.com/stretchr/testify/assert"
 )

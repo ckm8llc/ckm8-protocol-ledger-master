@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2015 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -23,9 +23,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/crypto"
-	dbbackend "github.com/thetatoken/theta/store/database/backend"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/crypto"
+	dbbackend "github.com/ckm8token/ckm8/store/database/backend"
 )
 
 func newEmptySecure() *SecureTrie {

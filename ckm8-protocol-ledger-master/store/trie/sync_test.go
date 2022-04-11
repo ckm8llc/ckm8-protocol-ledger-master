@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2015 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -21,8 +21,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/thetatoken/theta/common"
-	dbbackend "github.com/thetatoken/theta/store/database/backend"
+	"github.com/ckm8token/ckm8/common"
+	dbbackend "github.com/ckm8token/ckm8/store/database/backend"
 )
 
 // makeTestTrie create a sample test trie to test node-wise reconstruction.

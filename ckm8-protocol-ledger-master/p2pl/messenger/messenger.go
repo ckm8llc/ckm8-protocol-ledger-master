@@ -13,16 +13,16 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/util"
-	"github.com/thetatoken/theta/crypto"
-	p2ptypes "github.com/thetatoken/theta/p2p/types"
-	p2pcmn "github.com/thetatoken/theta/p2pl/common"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/common/util"
+	"github.com/ckm8token/ckm8/crypto"
+	p2ptypes "github.com/ckm8token/ckm8/p2p/types"
+	p2pcmn "github.com/ckm8token/ckm8/p2pl/common"
 
-	"github.com/thetatoken/theta/p2pl/peer"
+	"github.com/ckm8token/ckm8/p2pl/peer"
 
-	"github.com/thetatoken/theta/p2pl"
-	"github.com/thetatoken/theta/p2pl/transport"
+	"github.com/ckm8token/ckm8/p2pl"
+	"github.com/ckm8token/ckm8/p2pl/transport"
 
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
@@ -54,7 +54,7 @@ var logger *log.Entry = log.WithFields(log.Fields{"prefix": "p2pl"})
 var _ p2pl.Network = (*Messenger)(nil)
 
 const (
-	// thetaP2PProtocolPrefix            = "/theta/1.0.0/"
+	// ckm8P2PProtocolPrefix            = "/ckm8/1.0.0/"
 	defaultPeerDiscoveryPulseInterval = 10 * time.Second
 	connectInterval                   = 1000 // 1 sec
 	lowConnectivityCheckInterval      = 60
@@ -140,7 +140,7 @@ func CreateMessenger(pubKey *crypto.PublicKey, seedPeerMultiAddresses []string,
 	if viper.GetString(common.CfgP2PProtocolPrefix) != "" {
 		protocolPrefix = viper.GetString(common.CfgP2PProtocolPrefix)
 	} else {
-		protocolPrefix = "/theta/" + viper.GetString(common.CfgGenesisChainID) + "/" + viper.GetString(common.CfgP2PVersion) + "/"
+		protocolPrefix = "/ckm8/" + viper.GetString(common.CfgGenesisChainID) + "/" + viper.GetString(common.CfgP2PVersion) + "/"
 	}
 
 	messenger := &Messenger{

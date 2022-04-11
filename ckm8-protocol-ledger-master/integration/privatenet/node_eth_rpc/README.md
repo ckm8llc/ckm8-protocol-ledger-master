@@ -23,7 +23,7 @@ Test Wallet Private Key                                              Test Wallet
 
 ### Truffle
 
-To use these test wallets for Truffle, modidfy the `truffle-config.js` file to include the following. And you can run the test cases with `truffle test --network theta_privatenet`.
+To use these test wallets for Truffle, modidfy the `truffle-config.js` file to include the following. And you can run the test cases with `truffle test --network ckm8_privatenet`.
 
 ```js
 const HDWalletProvider = require('@truffle/hdwallet-provider');
@@ -37,7 +37,7 @@ module.exports = {
   },
  
   networks: {
-    theta_privatenet: {
+    ckm8_privatenet: {
       provider: () => {
         var privateKeyTest01 = '1111111111111111111111111111111111111111111111111111111111111111'; 
         var privateKeyTest02 = '2222222222222222222222222222222222222222222222222222222222222222';
@@ -66,7 +66,7 @@ module.exports = {
 
 ### Hardhat
 
-To use these test wallets for Hardhat, modidfy the `hardhat.config.js` file to include the following. And you can run the test cases with `npx hardhat test --network theta_privatenet
+To use these test wallets for Hardhat, modidfy the `hardhat.config.js` file to include the following. And you can run the test cases with `npx hardhat test --network ckm8_privatenet
 `.
 
 ```js
@@ -77,7 +77,7 @@ module.exports = {
   },
   networks: {
     ...
-    theta_privatenet: {
+    ckm8_privatenet: {
       url: "http://localhost:18888/rpc",
       accounts: [
         "1111111111111111111111111111111111111111111111111111111111111111", // 0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A

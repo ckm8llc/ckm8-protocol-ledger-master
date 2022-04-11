@@ -8,11 +8,11 @@ import (
 	"path"
 	"strconv"
 
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/crypto"
-	"github.com/thetatoken/theta/ledger/types"
+	"github.com/ckm8token/ckm8/blockchain"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/core"
+	"github.com/ckm8token/ckm8/crypto"
+	"github.com/ckm8token/ckm8/ledger/types"
 )
 
 func ExcludeTxs(txs []common.Bytes, exclusionTxMap map[string]bool, chain *blockchain.Chain) (results []common.Bytes) {
@@ -55,7 +55,7 @@ func ExportChainCorrection(chain *blockchain.Chain, ledger core.Ledger, snapshot
 		return "", nil, errors.New("Start height must be < end height")
 	}
 
-	backupFile = "theta_chain_correction-" + strconv.FormatUint(snapshotHeight, 10) + "-" + strconv.FormatUint(block.Height, 10)
+	backupFile = "ckm8_chain_correction-" + strconv.FormatUint(snapshotHeight, 10) + "-" + strconv.FormatUint(block.Height, 10)
 	backupPath := path.Join(backupDir, backupFile)
 	file, err := os.Create(backupPath)
 	if err != nil {

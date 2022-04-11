@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2014 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -31,9 +31,9 @@ import (
 	"github.com/syndtr/goleveldb/leveldb/iterator"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 	"github.com/syndtr/goleveldb/leveldb/util"
-	"github.com/thetatoken/theta/common/metrics"
-	"github.com/thetatoken/theta/store"
-	"github.com/thetatoken/theta/store/database"
+	"github.com/ckm8token/ckm8/common/metrics"
+	"github.com/ckm8token/ckm8/store"
+	"github.com/ckm8token/ckm8/store/database"
 )
 
 var logger *log.Entry = log.WithFields(log.Fields{"prefix": "store"})

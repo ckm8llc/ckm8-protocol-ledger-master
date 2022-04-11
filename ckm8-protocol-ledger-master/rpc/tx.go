@@ -8,13 +8,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/thetatoken/theta/cmd/thetacli/cmd/utils"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/hexutil"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/crypto"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/mempool"
+	"github.com/ckm8token/ckm8/cmd/ckm8cli/cmd/utils"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/common/hexutil"
+	"github.com/ckm8token/ckm8/core"
+	"github.com/ckm8token/ckm8/crypto"
+	"github.com/ckm8token/ckm8/ledger/types"
+	"github.com/ckm8token/ckm8/mempool"
 )
 
 const txTimeout = 60 * time.Second
@@ -90,7 +90,7 @@ func (m *TxCallbackManager) Trim() {
 
 var txCallbackManager = NewTxCallbackManager()
 
-func (t *ThetaRPCService) txCallback() {
+func (t *ckm8RPCService) txCallback() {
 	defer t.wg.Done()
 
 	timer := time.NewTicker(1 * time.Second)
@@ -134,7 +134,7 @@ type BroadcastRawTransactionResult struct {
 	Block  *core.BlockHeader `json:"block",rlp:"nil"`
 }
 
-func (t *ThetaRPCService) BroadcastRawTransaction(
+func (t *ckm8RPCService) BroadcastRawTransaction(
 	args *BroadcastRawTransactionArgs, result *BroadcastRawTransactionResult) (err error) {
 	txBytes, err := decodeTxHexBytes(args.TxBytes)
 	if err != nil {
@@ -189,7 +189,7 @@ type BroadcastRawTransactionAsyncResult struct {
 	TxHash string `json:"hash"`
 }
 
-func (t *ThetaRPCService) BroadcastRawTransactionAsync(
+func (t *ckm8RPCService) BroadcastRawTransactionAsync(
 	args *BroadcastRawTransactionAsyncArgs, result *BroadcastRawTransactionAsyncResult) (err error) {
 	txBytes, err := decodeTxHexBytes(args.TxBytes)
 	if err != nil {
@@ -215,7 +215,7 @@ func (t *ThetaRPCService) BroadcastRawTransactionAsync(
 
 // ------------------------------- BroadcastRawEthTransaction -----------------------------------
 
-func (t *ThetaRPCService) BroadcastRawEthTransaction(
+func (t *ckm8RPCService) BroadcastRawEthTransaction(
 	args *BroadcastRawTransactionArgs, result *BroadcastRawTransactionResult) (err error) {
 
 	ethTxStr := args.TxBytes
@@ -233,7 +233,7 @@ func (t *ThetaRPCService) BroadcastRawEthTransaction(
 
 // ------------------------------- BroadcastRawEthTransactionAsyc -----------------------------------
 
-func (t *ThetaRPCService) BroadcastRawEthTransactionAsync(
+func (t *ckm8RPCService) BroadcastRawEthTransactionAsync(
 	args *BroadcastRawTransactionAsyncArgs, result *BroadcastRawTransactionAsyncResult) (err error) {
 
 	ethTxStr := args.TxBytes
@@ -266,15 +266,15 @@ func (t *ThetaRPCService) BroadcastRawEthTransactionAsync(
 }
 
 func translateEthTx(ethTxStr string) (string, error) {
-	thetaSmartContractTx, err := types.TranslateEthTx(ethTxStr)
+	ckm8SmartContractTx, err := types.TranslateEthTx(ethTxStr)
 	if err != nil {
 		return "", err
 	}
 
 	logger.Debugf("Recovered from address: %v, signature: %v",
-		thetaSmartContractTx.From.Address.Hex(), thetaSmartContractTx.From.Signature.ToBytes().String())
+		ckm8SmartContractTx.From.Address.Hex(), ckm8SmartContractTx.From.Signature.ToBytes().String())
 
-	raw, err := types.TxToBytes(thetaSmartContractTx)
+	raw, err := types.TxToBytes(ckm8SmartContractTx)
 	if err != nil {
 		utils.Error("Failed to encode transaction: %v\n", err)
 	}

@@ -10,15 +10,15 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/result"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/crypto"
-	st "github.com/thetatoken/theta/ledger/state"
+	"https://github.com/fsmile2/ckm8/blockchain"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/common/result"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/crypto"
+	st "https://github.com/fsmile2/ckm8/ledger/state"
 
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/store/database/backend"
+	"https://github.com/fsmile2/ckm8/ledger/types"
+	"https://github.com/fsmile2/ckm8/store/database/backend"
 )
 
 // --------------- Test Utilities with Mocked Consensus Engine --------------- //
@@ -217,7 +217,7 @@ func createServicePaymentTx(chainID string, source, target *types.PrivAccount, a
 		Fee: types.NewCoins(0, getMinimumTxFee()),
 		Source: types.TxInput{
 			Address:  source.Address,
-			Coins:    types.Coins{TFuelWei: big.NewInt(amount), ThetaWei: big.NewInt(0)},
+			Coins:    types.Coins{TFuelWei: big.NewInt(amount), ckm8Wei: big.NewInt(0)},
 			Sequence: uint64(srcSeq),
 		},
 		Target: types.TxInput{
@@ -250,19 +250,19 @@ func setupForServicePayment(ast *assert.Assertions) (et *execTest, resourceID st
 	et = NewExecTest()
 
 	alice = types.MakeAcc("User Alice")
-	aliceInitBalance = types.Coins{TFuelWei: big.NewInt(10000 * getMinimumTxFee()), ThetaWei: big.NewInt(0)}
+	aliceInitBalance = types.Coins{TFuelWei: big.NewInt(10000 * getMinimumTxFee()), ckm8Wei: big.NewInt(0)}
 	alice.Balance = aliceInitBalance
 	et.acc2State(alice)
 	log.Infof("Alice's Address: %v", alice.Address.Hex())
 
 	bob = types.MakeAcc("User Bob")
-	bobInitBalance = types.Coins{TFuelWei: big.NewInt(3000 * getMinimumTxFee()), ThetaWei: big.NewInt(0)}
+	bobInitBalance = types.Coins{TFuelWei: big.NewInt(3000 * getMinimumTxFee()), ckm8Wei: big.NewInt(0)}
 	bob.Balance = bobInitBalance
 	et.acc2State(bob)
 	log.Infof("Bob's Address: %v", bob.Address.Hex())
 
 	carol = types.MakeAcc("User Carol")
-	carolInitBalance = types.Coins{TFuelWei: big.NewInt(3000 * getMinimumTxFee()), ThetaWei: big.NewInt(0)}
+	carolInitBalance = types.Coins{TFuelWei: big.NewInt(3000 * getMinimumTxFee()), ckm8Wei: big.NewInt(0)}
 	carol.Balance = carolInitBalance
 	et.acc2State(carol)
 	log.Infof("Carol's Address: %v", carol.Address.Hex())
@@ -274,10 +274,10 @@ func setupForServicePayment(ast *assert.Assertions) (et *execTest, resourceID st
 		Fee: types.NewCoins(0, getMinimumTxFee()),
 		Source: types.TxInput{
 			Address:  alice.Address,
-			Coins:    types.Coins{TFuelWei: big.NewInt(1000 * getMinimumTxFee()), ThetaWei: big.NewInt(0)},
+			Coins:    types.Coins{TFuelWei: big.NewInt(1000 * getMinimumTxFee()), ckm8Wei: big.NewInt(0)},
 			Sequence: 1,
 		},
-		Collateral:  types.Coins{TFuelWei: big.NewInt(1001 * getMinimumTxFee()), ThetaWei: big.NewInt(0)},
+		Collateral:  types.Coins{TFuelWei: big.NewInt(1001 * getMinimumTxFee()), ckm8Wei: big.NewInt(0)},
 		ResourceIDs: []string{resourceID},
 		Duration:    1000,
 	}

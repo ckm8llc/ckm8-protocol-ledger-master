@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/store"
-	"github.com/thetatoken/theta/store/database/backend"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/store"
+	"github.com/ckm8token/ckm8/store/database/backend"
 )
 
 type NodeHeader struct {

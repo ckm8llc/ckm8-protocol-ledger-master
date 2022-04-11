@@ -9,11 +9,11 @@ import (
 	"strings"
 
 	"github.com/spf13/viper"
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/snapshot"
-	"github.com/thetatoken/theta/store/database/backend"
-	"github.com/thetatoken/theta/store/kvstore"
+	"https://github.com/fsmile2/ckm8/blockchain"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/snapshot"
+	"https://github.com/fsmile2/ckm8/store/database/backend"
+	"https://github.com/fsmile2/ckm8/store/kvstore"
 )
 
 func handleError(err error) {
@@ -30,7 +30,7 @@ func printUsage() {
 
 func main() {
 	chainPtr := flag.String("chain", "", "chain id")
-	configPathPtr := flag.String("config", "", "path to theta config home")
+	configPathPtr := flag.String("config", "", "path to ckm8 config home")
 	snapshotPathPtr := flag.String("snapshot", "", "path to snapshot file")
 	chainImportDirPathPtr := flag.String("chain_import", "", "path to chain files directory")
 

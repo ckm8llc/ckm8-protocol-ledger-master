@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/result"
-	"github.com/thetatoken/theta/core"
-	st "github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/common/result"
+	"https://github.com/fsmile2/ckm8/core"
+	st "https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
 )
 
 var _ TxExecutor = (*ServicePaymentTxExecutor)(nil)
@@ -58,8 +58,8 @@ func (exec *ServicePaymentTxExecutor) sanityCheck(chainID string, view *st.Store
 		return res
 	}
 
-	if tx.Source.Coins.ThetaWei.Cmp(types.Zero) != 0 {
-		return result.Error("Cannot send ThetaWei as service payment!")
+	if tx.Source.Coins.ckm8Wei.Cmp(types.Zero) != 0 {
+		return result.Error("Cannot send ckm8Wei as service payment!")
 	}
 
 	// Verify source

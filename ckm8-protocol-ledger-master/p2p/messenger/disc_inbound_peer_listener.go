@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/p2p/netutil"
-	pr "github.com/thetatoken/theta/p2p/peer"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/p2p/netutil"
+	pr "github.com/ckm8token/ckm8/p2p/peer"
 
 	gonetutil "golang.org/x/net/netutil"
 )
@@ -286,7 +286,7 @@ func getUPNPExternalAddress(externalPort, internalPort int) *netutil.NetAddress 
 		externalPort = defaultExternalPort
 	}
 
-	externalPort, err = nat.AddPortMapping("tcp", externalPort, internalPort, "theta", 0)
+	externalPort, err = nat.AddPortMapping("tcp", externalPort, internalPort, "ckm8", 0)
 	if err != nil {
 		logger.Infof("Could not add UPNP port mapping: %v", err)
 		return nil

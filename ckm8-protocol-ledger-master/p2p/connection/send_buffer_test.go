@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/thetatoken/theta/common"
+	"github.com/ckm8token/ckm8/common"
 )
 
 func TestDefaultSendBuffer(t *testing.T) {

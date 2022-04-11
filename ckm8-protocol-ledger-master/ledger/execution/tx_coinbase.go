@@ -8,15 +8,15 @@ import (
 	"math/big"
 	"sort"
 
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/result"
-	"github.com/thetatoken/theta/common/util"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/ledger/state"
-	st "github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/store/database"
+	"https://github.com/fsmile2/ckm8/blockchain"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/common/result"
+	"https://github.com/fsmile2/ckm8/common/util"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/ledger/state"
+	st "https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
+	"https://github.com/fsmile2/ckm8/store/database"
 )
 
 var weiMultiplier = big.NewInt(1e18)
@@ -145,10 +145,10 @@ func RetrievePools(ledger core.Ledger, chain *blockchain.Chain, db database.Data
 	guardianPool = nil
 	eliteEdgeNodePool = nil
 
-	if blockHeight < common.HeightEnableTheta2 {
+	if blockHeight < common.HeightEnableckm82 {
 		guardianPool = nil
 		eliteEdgeNodePool = nil
-	} else if blockHeight < common.HeightEnableTheta3 {
+	} else if blockHeight < common.HeightEnableckm83 {
 		if guardianVotes != nil {
 			guradianVoteBlock, err := chain.FindBlock(guardianVotes.Block)
 			if err != nil {
@@ -157,7 +157,7 @@ func RetrievePools(ledger core.Ledger, chain *blockchain.Chain, db database.Data
 			storeView := st.NewStoreView(guradianVoteBlock.Height, guradianVoteBlock.StateHash, db)
 			guardianPool = storeView.GetGuardianCandidatePool()
 		}
-	} else { // blockHeight >= common.HeightEnableTheta3
+	} else { // blockHeight >= common.HeightEnableckm83
 		// won't reward the elite edge nodes without the guardian votes, since we need to guardian votes to confirm that
 		// the edge nodes vote for the correct checkpoint
 		if guardianVotes != nil {
@@ -192,11 +192,11 @@ func CalculateReward(ledger core.Ledger, view *st.StoreView, validatorSet *core.
 	blockHeight := view.Height() + 1 // view points to the parent block
 	if blockHeight < common.HeightEnableValidatorReward {
 		grantValidatorsWithZeroReward(validatorSet, &accountReward)
-	} else if blockHeight < common.HeightEnableTheta2 || guardianVotes == nil || guardianPool == nil {
+	} else if blockHeight < common.HeightEnableckm82 || guardianVotes == nil || guardianPool == nil {
 		grantValidatorReward(ledger, view, validatorSet, &accountReward, blockHeight)
-	} else if blockHeight < common.HeightEnableTheta3 {
+	} else if blockHeight < common.HeightEnableckm83 {
 		grantValidatorAndGuardianReward(ledger, view, validatorSet, guardianVotes, guardianPool, &accountReward, blockHeight)
-	} else { // blockHeight >= common.HeightEnableTheta3
+	} else { // blockHeight >= common.HeightEnableckm83
 		grantValidatorAndGuardianReward(ledger, view, validatorSet, guardianVotes, guardianPool, &accountReward, blockHeight)
 		grantEliteEdgeNodeReward(ledger, view, guardianVotes, eliteEdgeNodeVotes, eliteEdgeNodePool, &accountReward, blockHeight)
 	}
@@ -271,7 +271,7 @@ func grantValidatorReward(ledger core.Ledger, view *st.StoreView, validatorSet *
 		rewardAmount := tmp.Div(tmp, totalStake)
 
 		reward := types.Coins{
-			ThetaWei: big.NewInt(0),
+			ckm8Wei: big.NewInt(0),
 			TFuelWei: rewardAmount,
 		}.NoNil()
 		(*accountReward)[string(stakeSourceAddr[:])] = reward
@@ -280,7 +280,7 @@ func grantValidatorReward(ledger core.Ledger, view *st.StoreView, validatorSet *
 	}
 }
 
-// grant block rewards to both the validators and active guardians (they are both theta stakers)
+// grant block rewards to both the validators and active guardians (they are both ckm8 stakers)
 func grantValidatorAndGuardianReward(ledger core.Ledger, view *st.StoreView, validatorSet *core.ValidatorSet, guardianVotes *core.AggregatedVotes,
 	guardianPool *core.GuardianCandidatePool, accountReward *map[string]types.Coins, blockHeight uint64) {
 	if !common.IsCheckPointHeight(blockHeight) {
@@ -352,7 +352,7 @@ func grantValidatorAndGuardianReward(ledger core.Ledger, view *st.StoreView, val
 	totalReward := big.NewInt(1).Mul(tfuelRewardPerBlock, big.NewInt(common.CheckpointInterval))
 
 	var srdsr *st.StakeRewardDistributionRuleSet
-	if blockHeight >= common.HeightEnableTheta3 {
+	if blockHeight >= common.HeightEnableckm83 {
 		srdsr = state.NewStakeRewardDistributionRuleSet(view)
 	}
 
@@ -434,7 +434,7 @@ func grantEliteEdgeNodeReward(ledger core.Ledger, view *st.StoreView, guardianVo
 	logger.Debugf("grantEliteEdgeNodeReward: totalEffectiveStake = %v, totalReward = %v", totalEffectiveStake, totalReward)
 
 	var srdsr *st.StakeRewardDistributionRuleSet
-	if blockHeight >= common.HeightEnableTheta3 {
+	if blockHeight >= common.HeightEnableckm83 {
 		srdsr = state.NewStakeRewardDistributionRuleSet(view)
 	}
 
@@ -445,7 +445,7 @@ func grantEliteEdgeNodeReward(ledger core.Ledger, view *st.StoreView, guardianVo
 
 func addRewardToMap(receiver common.Address, amount *big.Int, accountReward *map[string]types.Coins) {
 	rewardCoins := types.Coins{
-		ThetaWei: big.NewInt(0),
+		ckm8Wei: big.NewInt(0),
 		TFuelWei: amount,
 	}.NoNil()
 	receiverAddr := string(receiver[:])

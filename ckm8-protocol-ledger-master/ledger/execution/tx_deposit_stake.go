@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/result"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/ledger/state"
-	st "github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/common/result"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/ledger/state"
+	st "https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
 )
 
 var _ TxExecutor = (*DepositStakeExecutor)(nil)
@@ -31,7 +31,7 @@ func NewDepositStakeExecutor(state *st.LedgerState) *DepositStakeExecutor {
 func (exec *DepositStakeExecutor) sanityCheck(chainID string, view *st.StoreView, transaction types.Tx) result.Result {
 	// Feature block height check
 	blockHeight := view.Height() + 1 // the view points to the parent of the current block
-	if _, ok := transaction.(*types.DepositStakeTxV2); ok && blockHeight < common.HeightEnableTheta2 {
+	if _, ok := transaction.(*types.DepositStakeTxV2); ok && blockHeight < common.HeightEnableckm82 {
 		return result.Error("Feature guardian is not active yet")
 	}
 
@@ -75,8 +75,8 @@ func (exec *DepositStakeExecutor) sanityCheck(chainID string, view *st.StoreView
 			WithErrorCode(result.CodeInvalidStake)
 	}
 
-	if tx.Purpose == core.StakeForEliteEdgeNode && stake.ThetaWei.Cmp(types.Zero) != 0 {
-		return result.Error("Theta has to be zero for elite edge node stake deposit!").
+	if tx.Purpose == core.StakeForEliteEdgeNode && stake.ckm8Wei.Cmp(types.Zero) != 0 {
+		return result.Error("ckm8 has to be zero for elite edge node stake deposit!").
 			WithErrorCode(result.CodeInvalidStake)
 	}
 
@@ -86,8 +86,8 @@ func (exec *DepositStakeExecutor) sanityCheck(chainID string, view *st.StoreView
 		if blockHeight >= common.HeightValidatorStakeChangedTo200K {
 			minValidatorStake = core.MinValidatorStakeDeposit200K
 		}
-		if stake.ThetaWei.Cmp(minValidatorStake) < 0 {
-			return result.Error("Insufficient amount of stake, at least %v ThetaWei is required for each validator deposit", minValidatorStake).
+		if stake.ckm8Wei.Cmp(minValidatorStake) < 0 {
+			return result.Error("Insufficient amount of stake, at least %v ckm8Wei is required for each validator deposit", minValidatorStake).
 				WithErrorCode(result.CodeInsufficientStake)
 		}
 	}
@@ -97,21 +97,21 @@ func (exec *DepositStakeExecutor) sanityCheck(chainID string, view *st.StoreView
 		if blockHeight >= common.HeightLowerGNStakeThresholdTo1000 {
 			minGuardianStake = core.MinGuardianStakeDeposit1000
 		}
-		if stake.ThetaWei.Cmp(minGuardianStake) < 0 {
-			return result.Error("Insufficient amount of stake, at least %v ThetaWei is required for each guardian deposit", minGuardianStake).
+		if stake.ckm8Wei.Cmp(minGuardianStake) < 0 {
+			return result.Error("Insufficient amount of stake, at least %v ckm8Wei is required for each guardian deposit", minGuardianStake).
 				WithErrorCode(result.CodeInsufficientStake)
 		}
 	}
 
 	if tx.Purpose == core.StakeForEliteEdgeNode {
-		if blockHeight < common.HeightEnableTheta3 {
-			return result.Error(fmt.Sprintf("Elite Edge Node staking not enabled yet, please wait until block height %v", common.HeightEnableTheta3)).WithErrorCode(result.CodeGenericError)
+		if blockHeight < common.HeightEnableckm83 {
+			return result.Error(fmt.Sprintf("Elite Edge Node staking not enabled yet, please wait until block height %v", common.HeightEnableckm83)).WithErrorCode(result.CodeGenericError)
 		}
 
 		minEliteEdgeNodeStake := core.MinEliteEdgeNodeStakeDeposit
 		maxEliteEdgeNodeStake := core.MaxEliteEdgeNodeStakeDeposit
 
-		if stake.ThetaWei.Cmp(big.NewInt(0)) > 0 {
+		if stake.ckm8Wei.Cmp(big.NewInt(0)) > 0 {
 			return result.Error("Only TFuel can be deposited for elite edge nodes").
 				WithErrorCode(result.CodeStakeExceedsCap)
 		}
@@ -164,7 +164,7 @@ func (exec *DepositStakeExecutor) process(chainID string, view *st.StoreView, tr
 
 	if tx.Purpose == core.StakeForValidator {
 		sourceAccount.Balance = sourceAccount.Balance.Minus(stake)
-		stakeAmount := stake.ThetaWei
+		stakeAmount := stake.ckm8Wei
 		vcp := view.GetValidatorCandidatePool()
 		err := vcp.DepositStake(sourceAddress, holderAddress, stakeAmount, blockHeight)
 		if err != nil {
@@ -173,7 +173,7 @@ func (exec *DepositStakeExecutor) process(chainID string, view *st.StoreView, tr
 		view.UpdateValidatorCandidatePool(vcp)
 	} else if tx.Purpose == core.StakeForGuardian {
 		sourceAccount.Balance = sourceAccount.Balance.Minus(stake)
-		stakeAmount := stake.ThetaWei
+		stakeAmount := stake.ckm8Wei
 		gcp := view.GetGuardianCandidatePool()
 
 		if !gcp.Contains(holderAddress) {

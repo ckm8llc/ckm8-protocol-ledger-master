@@ -11,23 +11,23 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/thetatoken/theta/ledger"
+	"github.com/ckm8token/ckm8/ledger"
 
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/consensus"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/rlp"
-	"github.com/thetatoken/theta/store"
-	"github.com/thetatoken/theta/store/database"
-	"github.com/thetatoken/theta/store/database/backend"
-	"github.com/thetatoken/theta/store/kvstore"
-	"github.com/thetatoken/theta/store/trie"
+	"github.com/ckm8token/ckm8/blockchain"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/consensus"
+	"github.com/ckm8token/ckm8/core"
+	"github.com/ckm8token/ckm8/ledger/state"
+	"github.com/ckm8token/ckm8/ledger/types"
+	"github.com/ckm8token/ckm8/rlp"
+	"github.com/ckm8token/ckm8/store"
+	"github.com/ckm8token/ckm8/store/database"
+	"github.com/ckm8token/ckm8/store/database/backend"
+	"github.com/ckm8token/ckm8/store/kvstore"
+	"github.com/ckm8token/ckm8/store/trie"
 )
 
 var logger *log.Entry = log.WithFields(log.Fields{"prefix": "snapshot"})
@@ -595,7 +595,7 @@ func loadChainSegment(filePath string, start, end uint64, prevBlock *core.Extend
 }
 
 func getChainBoundary(filename string) (start, end uint64) {
-	filename = filename[len("theta_chain-"):]
+	filename = filename[len("ckm8_chain-"):]
 	idx := strings.Index(filename, "-")
 	startStr := filename[:idx]
 	start, _ = strconv.ParseUint(startStr, 10, 64)

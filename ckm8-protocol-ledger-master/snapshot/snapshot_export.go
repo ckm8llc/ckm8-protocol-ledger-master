@@ -10,16 +10,16 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	cns "github.com/thetatoken/theta/consensus"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
-	"github.com/thetatoken/theta/store/database"
-	"github.com/thetatoken/theta/store/kvstore"
-	"github.com/thetatoken/theta/store/treestore"
-	"github.com/thetatoken/theta/store/trie"
+	"github.com/ckm8token/ckm8/blockchain"
+	"github.com/ckm8token/ckm8/common"
+	cns "github.com/ckm8token/ckm8/consensus"
+	"github.com/ckm8token/ckm8/core"
+	"github.com/ckm8token/ckm8/ledger/state"
+	"github.com/ckm8token/ckm8/ledger/types"
+	"github.com/ckm8token/ckm8/store/database"
+	"github.com/ckm8token/ckm8/store/kvstore"
+	"github.com/ckm8token/ckm8/store/treestore"
+	"github.com/ckm8token/ckm8/store/trie"
 )
 
 func ExportSnapshotV2(db database.Database, consensus *cns.ConsensusEngine, chain *blockchain.Chain, snapshotDir string, height uint64) (string, error) {
@@ -47,7 +47,7 @@ func ExportSnapshotV2(db database.Database, consensus *cns.ConsensusEngine, chai
 	sv := state.NewStoreView(lastFinalizedBlock.Height, lastFinalizedBlock.BlockHeader.StateHash, db)
 
 	currentTime := time.Now().UTC()
-	filename := "theta_snapshot-" + strconv.FormatUint(sv.Height(), 10) + "-" + sv.Hash().String() + "-" + currentTime.Format("2006-01-02")
+	filename := "ckm8_snapshot-" + strconv.FormatUint(sv.Height(), 10) + "-" + sv.Hash().String() + "-" + currentTime.Format("2006-01-02")
 	snapshotPath := path.Join(snapshotDir, filename)
 	file, err := os.Create(snapshotPath)
 	if err != nil {
@@ -263,7 +263,7 @@ func ExportSnapshotV3(db database.Database, consensus *cns.ConsensusEngine, chai
 	sv := state.NewStoreView(lastFinalizedBlock.Height, lastFinalizedBlock.BlockHeader.StateHash, db)
 
 	currentTime := time.Now().UTC()
-	filename := "theta_snapshot-" + strconv.FormatUint(sv.Height(), 10) + "-" + sv.Hash().String() + "-" + currentTime.Format("2006-01-02")
+	filename := "ckm8_snapshot-" + strconv.FormatUint(sv.Height(), 10) + "-" + sv.Hash().String() + "-" + currentTime.Format("2006-01-02")
 	snapshotPath := path.Join(snapshotDir, filename)
 	file, err := os.Create(snapshotPath)
 	if err != nil {
@@ -479,7 +479,7 @@ func ExportSnapshotV4(db database.Database, consensus *cns.ConsensusEngine, chai
 	sv := state.NewStoreView(lastFinalizedBlock.Height, lastFinalizedBlock.BlockHeader.StateHash, db)
 
 	currentTime := time.Now().UTC()
-	filename := "theta_snapshot-" + strconv.FormatUint(sv.Height(), 10) + "-" + sv.Hash().String() + "-" + currentTime.Format("2006-01-02")
+	filename := "ckm8_snapshot-" + strconv.FormatUint(sv.Height(), 10) + "-" + sv.Hash().String() + "-" + currentTime.Format("2006-01-02")
 	snapshotPath := path.Join(snapshotDir, filename)
 	file, err := os.Create(snapshotPath)
 	if err != nil {

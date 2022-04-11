@@ -1,7 +1,7 @@
 package store
 
 import (
-	"github.com/thetatoken/theta/common"
+	"github.com/ckm8token/ckm8/common"
 )
 
 // Store is the interface for key/value storages.

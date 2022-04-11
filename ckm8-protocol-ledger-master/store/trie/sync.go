@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2015 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -21,8 +21,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/store/database"
+	"github.com/ckm8token/ckm8/common"
+	"github.com/ckm8token/ckm8/store/database"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 )
 

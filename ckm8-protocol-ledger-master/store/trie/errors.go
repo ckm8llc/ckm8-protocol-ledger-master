@@ -1,4 +1,4 @@
-// Adapted for Theta
+// Adapted for ckm8
 // Copyright 2015 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -20,7 +20,7 @@ package trie
 import (
 	"fmt"
 
-	"github.com/thetatoken/theta/common"
+	"github.com/ckm8token/ckm8/common"
 )
 
 // MissingNodeError is returned by the trie functions (TryGet, TryUpdate, TryDelete)

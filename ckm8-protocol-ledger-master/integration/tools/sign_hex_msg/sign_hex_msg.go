@@ -5,15 +5,15 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/thetatoken/theta/cmd/thetacli/cmd/utils"
-	"github.com/thetatoken/theta/common"
-	ks "github.com/thetatoken/theta/wallet/softwallet/keystore"
+	"https://github.com/fsmile2/ckm8/cmd/ckm8cli/cmd/utils"
+	"https://github.com/fsmile2/ckm8/common"
+	ks "https://github.com/fsmile2/ckm8/wallet/softwallet/keystore"
 )
 
 //
 // Usage:   sign_hex_msg -signer=<signer_address> -keys_dir=<keys_dir> -msg=<hex_msg_to_be_signed> -encrypted=<true/false>
 //
-// Example: sign_hex_msg -signer=2E833968E5bB786Ae419c4d13189fB081Cc43bab -keys_dir=$HOME/.thetacli/keys -msg=02f8a4c78085e8d4a51000f86ff86d942e833968e5 -encrypted=true
+// Example: sign_hex_msg -signer=2E833968E5bB786Ae419c4d13189fB081Cc43bab -keys_dir=$HOME/.ckm8cli/keys -msg=02f8a4c78085e8d4a51000f86ff86d942e833968e5 -encrypted=true
 //
 func main() {
 	signerAddress, keysDir, message, encrypted := parseArguments()

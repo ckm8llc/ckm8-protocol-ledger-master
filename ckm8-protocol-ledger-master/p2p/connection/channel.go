@@ -1,7 +1,7 @@
 package connection
 
 import (
-	"github.com/thetatoken/theta/common"
+	"github.com/ckm8token/ckm8/common"
 )
 
 //

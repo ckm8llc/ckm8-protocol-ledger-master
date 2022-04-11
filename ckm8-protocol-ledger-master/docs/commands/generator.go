@@ -5,20 +5,20 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra/doc"
-	theta "github.com/thetatoken/theta/cmd/theta/cmd"
-	thetacli "github.com/thetatoken/theta/cmd/thetacli/cmd"
+	ckm8 "https://github.com/fsmile2/ckm8/cmd/ckm8/cmd"
+	ckm8cli "https://github.com/fsmile2/ckm8/cmd/ckm8cli/cmd"
 )
 
-func generateThetaCLIDoc(filePrepender, linkHandler func(string) string) {
-	var all = thetacli.RootCmd
+func generateckm8CLIDoc(filePrepender, linkHandler func(string) string) {
+	var all = ckm8cli.RootCmd
 	err := doc.GenMarkdownTreeCustom(all, "./wallet/", filePrepender, linkHandler)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-func generateThetaDoc(filePrepender, linkHandler func(string) string) {
-	var all = theta.RootCmd
+func generateckm8Doc(filePrepender, linkHandler func(string) string) {
+	var all = ckm8.RootCmd
 	err := doc.GenMarkdownTreeCustom(all, "./ledger/", filePrepender, linkHandler)
 	if err != nil {
 		log.Fatal(err)
@@ -34,7 +34,7 @@ func main() {
 		return strings.ToLower(name)
 	}
 
-	generateThetaCLIDoc(filePrepender, linkHandler)
-	generateThetaDoc(filePrepender, linkHandler)
+	generateckm8CLIDoc(filePrepender, linkHandler)
+	generateckm8Doc(filePrepender, linkHandler)
 	Walk()
 }

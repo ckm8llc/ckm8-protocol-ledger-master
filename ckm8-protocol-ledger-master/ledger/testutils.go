@@ -7,23 +7,23 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/thetatoken/theta/blockchain"
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/consensus"
-	"github.com/thetatoken/theta/core"
-	"github.com/thetatoken/theta/crypto"
-	dp "github.com/thetatoken/theta/dispatcher"
-	exec "github.com/thetatoken/theta/ledger/execution"
-	"github.com/thetatoken/theta/ledger/state"
-	st "github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
-	mp "github.com/thetatoken/theta/mempool"
-	"github.com/thetatoken/theta/p2p"
-	p2psim "github.com/thetatoken/theta/p2p/simulation"
-	"github.com/thetatoken/theta/p2pl"
-	"github.com/thetatoken/theta/store/database"
-	"github.com/thetatoken/theta/store/database/backend"
-	"github.com/thetatoken/theta/store/kvstore"
+	"https://github.com/fsmile2/ckm8/blockchain"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/consensus"
+	"https://github.com/fsmile2/ckm8/core"
+	"https://github.com/fsmile2/ckm8/crypto"
+	dp "https://github.com/fsmile2/ckm8/dispatcher"
+	exec "https://github.com/fsmile2/ckm8/ledger/execution"
+	"https://github.com/fsmile2/ckm8/ledger/state"
+	st "https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
+	mp "https://github.com/fsmile2/ckm8/mempool"
+	"https://github.com/fsmile2/ckm8/p2p"
+	p2psim "https://github.com/fsmile2/ckm8/p2p/simulation"
+	"https://github.com/fsmile2/ckm8/p2pl"
+	"https://github.com/fsmile2/ckm8/store/database"
+	"https://github.com/fsmile2/ckm8/store/database/backend"
+	"https://github.com/fsmile2/ckm8/store/kvstore"
 )
 
 type mockSnapshot struct {
@@ -112,27 +112,27 @@ func genSimSnapshot(chainID string, db database.Database) (snapshot mockSnapshot
 	src5Acc := types.MakeAcc("src5")
 	src6Acc := types.MakeAcc("src6")
 	src1Acc.Balance = types.Coins{
-		ThetaWei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
+		ckm8Wei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
 		TFuelWei: new(big.Int).Mul(new(big.Int).SetUint64(100), core.MinValidatorStakeDeposit),
 	}
 	src2Acc.Balance = types.Coins{
-		ThetaWei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
+		ckm8Wei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
 		TFuelWei: new(big.Int).Mul(new(big.Int).SetUint64(100), core.MinValidatorStakeDeposit),
 	}
 	src3Acc.Balance = types.Coins{
-		ThetaWei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
+		ckm8Wei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
 		TFuelWei: new(big.Int).Mul(new(big.Int).SetUint64(100), core.MinValidatorStakeDeposit),
 	}
 	src4Acc.Balance = types.Coins{
-		ThetaWei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
+		ckm8Wei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
 		TFuelWei: new(big.Int).Mul(new(big.Int).SetUint64(100), core.MinValidatorStakeDeposit),
 	}
 	src5Acc.Balance = types.Coins{
-		ThetaWei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
+		ckm8Wei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
 		TFuelWei: new(big.Int).Mul(new(big.Int).SetUint64(100), core.MinValidatorStakeDeposit),
 	}
 	src6Acc.Balance = types.Coins{
-		ThetaWei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
+		ckm8Wei: new(big.Int).Mul(new(big.Int).SetUint64(20), core.MinValidatorStakeDeposit),
 		TFuelWei: new(big.Int).Mul(new(big.Int).SetUint64(100), core.MinValidatorStakeDeposit),
 	}
 

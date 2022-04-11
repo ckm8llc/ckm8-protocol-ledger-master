@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/thetatoken/theta/common"
-	"github.com/thetatoken/theta/common/result"
-	"github.com/thetatoken/theta/core"
-	st "github.com/thetatoken/theta/ledger/state"
-	"github.com/thetatoken/theta/ledger/types"
+	"https://github.com/fsmile2/ckm8/common"
+	"https://github.com/fsmile2/ckm8/common/result"
+	"https://github.com/fsmile2/ckm8/core"
+	st "https://github.com/fsmile2/ckm8/ledger/state"
+	"https://github.com/fsmile2/ckm8/ledger/types"
 )
 
 var _ TxExecutor = (*ReserveFundTxExecutor)(nil)
@@ -58,8 +58,8 @@ func (exec *ReserveFundTxExecutor) sanityCheck(chainID string, view *st.StoreVie
 			WithErrorCode(result.CodeReservedFundNotSpecified)
 	}
 
-	if coins.ThetaWei.Cmp(types.Zero) != 0 {
-		return result.Error("Cannot reserve Theta as service fund!").
+	if coins.ckm8Wei.Cmp(types.Zero) != 0 {
+		return result.Error("Cannot reserve ckm8 as service fund!").
 			WithErrorCode(result.CodeInvalidFundToReserve)
 	}
 
